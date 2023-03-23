@@ -86,15 +86,12 @@ public class Main {
             Node node = nodeList.item(i);
             if (Node.ELEMENT_NODE == node.getNodeType()) {
                 Element employee = (Element) node;
-                // ???
-                /*
-                    long id = Long.parseLong(employee.getAttribute("id"));
-                    String firstName = employee.getAttribute("firstName");
-                    String lastName = employee.getAttribute("lastName");
-                    String country = employee.getAttribute("country");
-                    int age = Integer.parseInt(employee.getAttribute("age"));
-                */
-                // result.add(new Employee(id, firstName, lastName, country, age));
+                long id = Long.parseLong(employee.getElementsByTagName("id").item(0).getTextContent());
+                String firstName = employee.getElementsByTagName("firstName").item(0).getTextContent();
+                String lastName = employee.getElementsByTagName("lastName").item(0).getTextContent();
+                String country = employee.getElementsByTagName("country").item(0).getTextContent();
+                int age = Integer.parseInt(employee.getElementsByTagName("age").item(0).getTextContent());
+                result.add(new Employee(id, firstName, lastName, country, age));
             }
         }
         return result;
@@ -111,11 +108,6 @@ public class Main {
             Employee employee = gson.fromJson(jo.toString(), Employee.class);
             result.add(employee);
         }
-//        for (int i = 0; i < )
-
-//        System.out.println(midtermJson);
-
-//        result = gson.fromJson(midtermJson.toString(), new TypeToken<List<Employee>>(){}.getType());
         return result;
     }
 
